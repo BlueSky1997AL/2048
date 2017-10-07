@@ -7,8 +7,19 @@ let conflict = [];
 let score = 0;
 
 $(function () {
-    init();
+    for (let i = 0; i < 4; i++) {
+        for (let j = 0; j < 4; j++) {
+            $('#grid-container').append(`<div class="grid-cell" id="grid-cell-${i}-${j}"></div>`);
+        }
+    }
+    newGame();
 })
+
+function newGame () {
+    init();
+    generateANum();
+    generateANum();
+}
 
 function init () {
     for (let i = 0; i < 4; i++) {
@@ -17,7 +28,6 @@ function init () {
         for (let j = 0; j < 4; j++) {
             board[i][j] = 0;
             conflict[i][j] = false;
-            $('#grid-container').append(`<div class="grid-cell" id="grid-cell-${i}-${j}"></div>`);
             $(`#grid-cell-${i}-${j}`).css({
                 top: getPos(i),
                 left: getPos(j)
@@ -26,45 +36,98 @@ function init () {
     }
 
     //#region Test Array
-    board = [
-        [0, 2, 4, 8],
-        [16, 32, 64, 128],
-        [256, 512, 1024, 2048],
-        [4096, 8192, 0, 0]
-    ];
+    // board = [
+    //     [0, 2, 4, 8],
+    //     [16, 32, 64, 128],
+    //     [256, 512, 1024, 2048],
+    //     [4096, 8192, 16384, 32768]
+    // ];
     //#endregion
 
     renderBoardView();
+    score = 0;
+    renderScore(score);
 }
 
 function renderBoardView () {
     $('.num-cell').remove();
-    board.forEach((value, index) => {
-        value.forEach((v, i) => {
-            $('#grid-container').append(`<div class="num-cell" id="num-cell-${index}-${i}"></div>`);
-            const numCell = $(`#num-cell-${index}-${i}`);
-            if (v == 0) {
+    board.forEach((rows, row) => {
+        rows.forEach((num, col) => {
+            $('#grid-container').append(`<div class="num-cell" id="num-cell-${row}-${col}"></div>`);
+            const numCell = $(`#num-cell-${row}-${col}`);
+            if (num == 0) {
                 numCell.css({
                     height: '0px',
                     width: '0px',
-                    top: getPos(index) + cellSideLength / 2,
-                    left: getPos(i) + cellSideLength / 2
+                    top: getPos(row) + cellSideLength / 2,
+                    left: getPos(col) + cellSideLength / 2
                 })
             } else {
-                const styleObj = getStyle(v);
-                numCell.css({
-                    height: cellSideLength,
-                    width: cellSideLength,
-                    top: getPos(index),
-                    left: getPos(i),
-                    backgroundColor: styleObj['backgroundColor'],
-                    color: styleObj['color'],
-                    fontSize: styleObj['fontSize'],
-                    lineHeight: `${cellSideLength}px`
-                });
-                numCell.text(v);
+                numCell
+                    .css({
+                        height: cellSideLength,
+                        width: cellSideLength,
+                        top: getPos(row),
+                        left: getPos(col),
+                        backgroundColor: getBackgroundColor(num),
+                        color: getFontColor(num),
+                        fontSize: getFontSize(num),
+                        lineHeight: `${cellSideLength}px`
+                    })
+                    .text(num);
             }
-            conflict[index][i] = false;
+            conflict[row][col] = false;
         })
     })
 }
+
+function generateANum () {
+    if (isNoSpace(board)) {
+        return false;
+    }
+    let row, col;
+    let count = 50;
+    do {
+        row = Math.floor(Math.random() * 4);
+        col = Math.floor(Math.random() * 4);
+        count--;
+    } while (board[row][col] && count)
+    if (count == 0 && board[row][col]) {
+        board.some((rows, rowIndex) => {
+            rows.some((num, colIndex) => {
+                if (num == 0) {
+                    row = rowIndex;
+                    col = colIndex;
+                    return true;
+                }
+            })
+        })
+    }
+    const randNum = Math.random() < 0.5 ? 2 : 4;
+    board[row][col] = randNum;
+    showNum(row, col, randNum);
+    return true;
+}
+
+$(document).keydown(function (event) {
+    switch (event.keyCode) {
+        //left
+        case 37: case 65:
+            event.preventDefault();
+            break;
+        // up
+        case 38: case 87:
+            event.preventDefault();
+            break;
+        // right
+        case 39: case 68:
+            event.preventDefault();
+            break;
+        // down
+        case 40: case 83:
+            event.preventDefault();
+            break;
+        default:
+            break;
+    }
+})
