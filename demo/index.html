@@ -1,48 +1,26 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-	<title>2048</title>
-	<link rel="stylesheet" href="./src/style.css">
-	<script type="text/javascript" src="./src/jQuery_v3.2.1.js"></script>
-	<script type="text/javascript" src="./src/main.js"></script>
-	<script type="text/javascript" src="./src/showanimation.js"></script>
-	<script type="text/javascript" src="./src/support.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>2048</title>
+    <link rel="stylesheet" href="./style.css">
+    <script type="text/javascript" src="./jQuery_v3.2.1.js"></script>
+    <script type="text/javascript" src="./main.js"></script>
+    <script type="text/javascript" src="./func.js"></script>
+    <script type="text/javascript" src="./animation.js"></script>
+    <!-- <script type="text/javascript" src="./support.js"></script> -->
 </head>
-
 <body>
-	<header>
-		<h1>2048</h1>
-		<a href="javascript:new_game();" id="new_game_button">New Game</a>
-		<p>SCORE: <span id="score">0</span></p>
-	</header>
-	<div id="grid_container">
-		<div class="grid_cell" id="grid_cell_0_0"></div>
-		<div class="grid_cell" id="grid_cell_0_1"></div>
-		<div class="grid_cell" id="grid_cell_0_2"></div>
-		<div class="grid_cell" id="grid_cell_0_3"></div>
-
-		<div class="grid_cell" id="grid_cell_1_0"></div>
-		<div class="grid_cell" id="grid_cell_1_1"></div>
-		<div class="grid_cell" id="grid_cell_1_2"></div>
-		<div class="grid_cell" id="grid_cell_1_3"></div>
-
-		<div class="grid_cell" id="grid_cell_2_0"></div>
-		<div class="grid_cell" id="grid_cell_2_1"></div>
-		<div class="grid_cell" id="grid_cell_2_2"></div>
-		<div class="grid_cell" id="grid_cell_2_3"></div>
-
-		<div class="grid_cell" id="grid_cell_3_0"></div>
-		<div class="grid_cell" id="grid_cell_3_1"></div>
-		<div class="grid_cell" id="grid_cell_3_2"></div>
-		<div class="grid_cell" id="grid_cell_3_3"></div>
-	</div>
-	<footer>
-	</footer>
-
-
+    <header>
+        <h1>2048</h1>
+        <a href="javascript:newGame()" id="newGame">New Game</a>
+        <div>SCORE: <span id="score">0</span></div>
+    </header>
+    <section id="container">
+        <div id="grid-container"></div>
+    </section>
+    <footer></footer>
 </body>
-
 </html>
