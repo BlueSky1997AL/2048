@@ -114,6 +114,7 @@ $(document).keydown(function (event) {
         //left
         case 37: case 65:
             event.preventDefault();
+            
             break;
         // up
         case 38: case 87:
@@ -131,3 +132,35 @@ $(document).keydown(function (event) {
             break;
     }
 })
+
+function moveLeft () {
+    if (!canMoveLeft(board)) {
+        return false;
+    }
+    for (let row = 0; row < 4; row++) {
+        for (let col = 1; col <4; col++) {
+            if (board[row][col] != 0) {
+                for (let colIndex = 0; colIndex < col; colIndex++) {
+                    if (board[row][colIndex] == 0 && hasHorizontalSpace(row, colIndex, col, board)) {
+                        motionAnimation(row, col, row, colIndex);
+                        board[row][colIndex] = board[row][col];
+                        board[row][col] = 0;
+                        break;
+                    } else if (board[row][colIndex] == board[row][col] && hasHorizontalSpace(row, colIndex, col, board) && !conflict[row][colIndex]) {
+                        motionAnimation(row, col, row, colIndex);
+                        board[row][colIndex] += board[row][col];
+                        board[row][col] = 0;
+                        score += board[row][colIndex];
+                        renderScore(score);
+                        conflict[row][colIndex] = true;
+                        break;
+                    }
+                }
+            }
+        }
+    }
+    setTimeout(function() {
+        renderBoardView();
+    }, 200);
+    return true;
+}

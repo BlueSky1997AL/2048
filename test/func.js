@@ -85,3 +85,21 @@ function canMoveDown(board) {
     }
     return false;
 }
+
+function hasHorizontalSpace (row, startCol, endCol, board) {
+    for (let colIndex = startCol + 1; colIndex < endCol; colIndex++) {
+        if (board[row][colIndex] != 0) {
+            return false;
+        }
+    }
+    return true;
+}
+
+function hasVerticalSpace (col, startRow, endRow, board) {
+    for (let rowIndex = startRow + 1; rowIndex < endRow; rowIndex++) {
+        if (board[rowIndex][col] != 0) {
+            return false;
+        }
+    }
+    return true;
+}
