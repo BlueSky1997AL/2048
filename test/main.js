@@ -256,10 +256,7 @@ function moveDown () {
     for (let col = 0; col < 4; col++) {
         for (let row = 2; row >= 0; row--) {
             if (board[row][col] != 0) {
-                for (let rowIndex = 3; rowIndex > row; row--) {
-                    // console.log(board[rowIndex][col] == board[row][col] && hasVerticalSpace(col, row, rowIndex, board) && !conflict[rowIndex][col]);
-                    // console.log(board[rowIndex][col]);
-                    // There are some bugs unsolved
+                for (let rowIndex = 3; rowIndex > row; rowIndex--) {
                     if (board[rowIndex][col] == 0 && hasVerticalSpace(col, row, rowIndex, board)) {
                         motionAnimation(row, col, rowIndex, col);
                         board[rowIndex][col] = board[row][col];
