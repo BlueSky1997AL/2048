@@ -1,6 +1,10 @@
-const gridContainerWidth = 500;
-const cellSideLength = 100;
-const cellSpace = 20;
+let deviceWidth = window.screen.availWidth;
+let gridContainerWidth = 0.92 * deviceWidth;
+let cellSideLength = 0.18 * deviceWidth;
+let cellSpace = 0.04 * deviceWidth;
+
+const success = 'You Win!';
+const failure = 'Game Over!'
 
 let board = [];
 let conflict = [];
@@ -12,6 +16,7 @@ $(function () {
             $('#grid-container').append(`<div class="grid-cell" id="grid-cell-${i}-${j}"></div>`);
         }
     }
+    mobileCompatible();
     newGame();
 })
 
@@ -292,8 +297,71 @@ function isGameOver (board) {
         })
     ) {
         // Need to be improved
-        renderScore(`You Win!`);
+        renderScore(success);
     } else if (isNoSpace(board) && !canMove(board)) {
-        renderScore(`Game Over!`);
+        renderScore(failure);
     }
 }
+
+function mobileCompatible () {
+    if (deviceWidth > 500) {
+        gridContainerWidth = 500;
+        cellSideLength = 100;
+        cellSpace = 20;
+    }
+    $('#grid-container').css({
+        width: gridContainerWidth - 2 * cellSpace,
+        height: gridContainerWidth - 2 * cellSpace,
+        padding: cellSpace,
+        borderRadius: 0.02 * gridContainerWidth
+    });
+    $('.grid-cell').css({
+        width: cellSideLength,
+        height: cellSideLength,
+        borderRadius: 0.02 * gridContainerWidth
+    })
+}
+
+document.addEventListener('touchstart', function (event) {
+    startX = event.touches[0].pageX;
+    startY = event.touches[0].pageY;
+});
+
+document.addEventListener('touchmove', function (event) {
+    event.preventDefault();
+});
+
+document.addEventListener('touchend', function (event) {
+    endX = event.changedTouches[0].pageX;
+    endY = event.changedTouches[0].pageY;
+    let triangleX = endX - startX;
+    let triangleY = endY - startY;
+    if (Math.abs(triangleX) < 0.3 * deviceWidth && Math.abs(triangleY) < 0.3 * deviceWidth) {
+        return;
+    }
+    if ($('#score').text() == success) {
+        newGame();
+        return;
+    }
+    if (Math.abs(triangleX) >= Math.abs(triangleY)) {
+        if (triangleX > 0) {
+            if (moveRight()) {
+                setTimer();
+            }
+        } else {
+            if (moveLeft()) {
+                setTimer();
+            }
+        }
+    } else {
+        if (triangleY > 0) {
+            if (moveDown()) {
+                setTimer();
+            }
+        } else {
+            if (moveUp()) {
+                setTimer();
+            }
+        }
+    }
+})

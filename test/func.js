@@ -29,7 +29,7 @@ function getFontColor(num) {
 }
 
 function getFontSize(num) {
-    return (8 - (num + '').length) * 10;
+    return (8 - (num + '').length) * cellSideLength * 0.1;
 }
 
 function isNoSpace(board) {
