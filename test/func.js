@@ -103,3 +103,10 @@ function hasVerticalSpace (col, startRow, endRow, board) {
     }
     return true;
 }
+
+function canMove (board) {
+    if (canMoveUp(board) || canMoveDown(board) || canMoveLeft(board) || canMoveRight(board)) {
+        return true;
+    }
+    return false;
+}

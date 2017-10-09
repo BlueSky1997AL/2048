@@ -109,24 +109,44 @@ function generateANum () {
     return true;
 }
 
+function setTimer () {
+    setTimeout(function() {
+        generateANum();
+    }, motionDuration + 10);
+    setTimeout(function() {
+        isGameOver(board);
+    }, motionDuration + showUpDuration + 10);
+}
+
 $(document).keydown(function (event) {
     switch (event.keyCode) {
         //left
         case 37: case 65:
             event.preventDefault();
-            
+            if (moveLeft()) {
+                setTimer();
+            }
             break;
         // up
         case 38: case 87:
             event.preventDefault();
+            if (moveUp()) {
+                setTimer();
+            }
             break;
         // right
         case 39: case 68:
             event.preventDefault();
+            if (moveRight()) {
+                setTimer();
+            }
             break;
         // down
         case 40: case 83:
             event.preventDefault();
+            if (moveDown()) {
+                setTimer();
+            }
             break;
         default:
             break;
@@ -161,6 +181,122 @@ function moveLeft () {
     }
     setTimeout(function() {
         renderBoardView();
-    }, 200);
+    }, motionDuration);
     return true;
+}
+
+function moveRight () {
+    if (!canMoveRight(board)) {
+        return false;
+    }
+    for (let row = 0; row < 4; row ++) {
+        for (let col = 2; col >= 0; col--) {
+            if (board[row][col] != 0) {
+                for (let colIndex = 3; colIndex > col; colIndex--) {
+                    if (board[row][colIndex] == 0 && hasHorizontalSpace(row, col, colIndex, board)) {
+                        motionAnimation(row, col, row, colIndex);
+                        board[row][colIndex] = board[row][col];
+                        board[row][col] = 0;
+                        break;
+                    } else if (board[row][colIndex] == board[row][col] && hasHorizontalSpace(row, col, colIndex, board) && !conflict[row][colIndex]) {
+                        motionAnimation(row, col, row, colIndex);
+                        board[row][colIndex] += board[row][col];
+                        board[row][col] = 0;
+                        score += board[row][colIndex];
+                        renderScore(score);
+                        conflict[row][colIndex] = true;
+                        break;
+                    }
+                }
+            }
+        }
+    }
+    setTimeout(function() {
+        renderBoardView();
+    }, motionDuration);
+    return true;
+}
+
+function moveUp () {
+    if (!canMoveUp(board)) {
+        return false;
+    }
+    for (let col = 0; col < 4; col++) {
+        for (let row = 1; row < 4; row++) {
+            if (board[row][col] != 0) {
+                for (let rowIndex = 0; rowIndex < row; rowIndex++) {
+                    if (board[rowIndex][col] == 0 && hasVerticalSpace(col, rowIndex, row, board)) {
+                        motionAnimation(row, col, rowIndex, col);
+                        board[rowIndex][col] = board[row][col];
+                        board[row][col] = 0;
+                        break;
+                    } else if (board[rowIndex][col] == board[row][col] && hasVerticalSpace(col, rowIndex, row, board) && !conflict[rowIndex][col]) {
+                        motionAnimation(row, col, rowIndex, col);
+                        board[rowIndex][col] += board[row][col];
+                        board[row][col] = 0;
+                        score += board[rowIndex][col];
+                        renderScore(score);
+                        conflict[rowIndex][col] = true;
+                        break;
+                    }
+                }
+            }
+        }
+    }
+    setTimeout(function() {
+        renderBoardView();
+    }, motionDuration);
+    return true;
+}
+
+function moveDown () {
+    if (!canMoveDown) {
+        return false;
+    }
+    for (let col = 0; col < 4; col++) {
+        for (let row = 2; row >= 0; row--) {
+            if (board[row][col] != 0) {
+                for (let rowIndex = 3; rowIndex > row; row--) {
+                    // console.log(board[rowIndex][col] == board[row][col] && hasVerticalSpace(col, row, rowIndex, board) && !conflict[rowIndex][col]);
+                    // console.log(board[rowIndex][col]);
+                    // There are some bugs unsolved
+                    if (board[rowIndex][col] == 0 && hasVerticalSpace(col, row, rowIndex, board)) {
+                        motionAnimation(row, col, rowIndex, col);
+                        board[rowIndex][col] = board[row][col];
+                        board[row][col] = 0;
+                        break;
+                    } else if (board[rowIndex][col] == board[row][col] && hasVerticalSpace(col, row, rowIndex, board) && !conflict[rowIndex][col]) {
+                        motionAnimation(row, col, rowIndex, col);
+                        board[rowIndex][col] += board[row][col];
+                        board[row][col] = 0;
+                        score += board[rowIndex][col];
+                        renderScore(score);
+                        conflict[rowIndex][col] = true;
+                        break;
+                    }
+                }
+            }
+        }
+    }
+    setTimeout(function() {
+        renderBoardView();
+    }, motionDuration);
+    return true;
+}
+
+function isGameOver (board) {
+    if (
+        board.some((rows, row) => {
+            return rows.some((num, col) => {
+                if (num == 2048) {
+                    return true;
+                }
+            })
+        })
+    ) {
+        // Need to be improved
+        renderScore(`You Win!`);
+    } else if (isNoSpace(board) && !canMove(board)) {
+        renderScore(`Game Over!`);
+    }
 }
