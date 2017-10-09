@@ -11,7 +11,8 @@ function showNum (row, col, num) {
         .css({
             backgroundColor: getBackgroundColor(num),
             color: getFontColor(num),
-            fontSize: getFontSize(num)
+            fontSize: getFontSize(num),
+            lineHeight: `${cellSideLength}px`
         })
         .text(num)
         .animate({
