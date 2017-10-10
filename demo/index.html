@@ -27,7 +27,7 @@
         <div id="success-msg-box">
             <div class="message-box">
                 <h1>You Win!</h1>
-                <p>You've achieved the number of 2048! Your score is {{score}}, and the highest score is {{estScore}}</p>
+                <p>You've achieved the number of 2048! Your score is <span id="score"></span> , and the highest score is <span id="highest-score">0</span> .</p>
                 <p>Do you want to continue, or start a new game?</p>
                 <div class="btn-container">
                     <a href="javascript:continueGame()" class="btn">Continue</a>
@@ -37,8 +37,8 @@
         </div>
         <div id="failure-msg-box">
             <div class="message-box">
-                <h1>Oops, game over</h1>
-                <p>We are sorry to announce that game is over. Your score is span#, and the highest score is {{estScore}}</p>
+                <h1>Oops, Game Over</h1>
+                <p>We are sorry to announce that game is over. Your score is <span id="score">0</span> , and the highest score is <span id="highest-score">0</span> .</p>
                 <p>Do you want to start a new game?</p>
                 <div class="btn-container">
                     <a href="javascript:newGame()" class="btn">New Game</a>

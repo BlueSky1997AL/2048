@@ -1,5 +1,6 @@
 const showUpDuration = 100;
 const motionDuration = 300;
+const fadeDuration = 700;
 
 function renderScore (score) {
     // Need to be improved by using animation

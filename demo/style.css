@@ -93,3 +93,7 @@ header > div {
     text-align: center;
     font-weight: bold;
 }
+
+.message-box #score, .message-box #highest-score {
+    color: red;
+}

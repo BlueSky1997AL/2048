@@ -21,6 +21,12 @@ $(function () {
 })
 
 function newGame () {
+    if ($('#success-msg-box').css('display') == 'block') {
+        $('#success-msg-box').fadeOut(fadeDuration);
+    }
+    if ($('#failure-msg-box').css('display') == 'block') {
+        $('#failure-msg-box').fadeOut(fadeDuration);
+    }
     init();
     generateANum();
     generateANum();
@@ -367,21 +373,25 @@ document.addEventListener('touchend', function (event) {
 
 function renderSuccessBox () {
     if ($('#success-msg-box').css('display') == 'none') {
-        $('#success-msg-box').fadeIn(700);
+        $('#success-msg-box #score').text(score);
+        $('#success-msg-box #highest-score').text(score);
+        $('#success-msg-box').fadeIn(fadeDuration);
     }
 }
 
 function continueGame () {
     if ($('#success-msg-box').css('display') == 'block') {
-        $('#success-msg-box').fadeOut(700);
+        $('#success-msg-box').fadeOut(fadeDuration);
     }
     if ($('#failure-msg-box').css('display') == 'block') {
-        $('#failure-msg-box').fadeOut(700);
+        $('#failure-msg-box').fadeOut(fadeDuration);
     }
 }
 
 function renderFailureBox () {
     if ($('#failure-msg-box').css('display') == 'none') {
-        $('#failure-msg-box').fadeIn(700);
+        $('#failure-msg-box #score').text(score);
+        $('#failure-msg-box #highest-score').text(score);
+        $('#failure-msg-box').fadeIn(fadeDuration);
     }
 }
