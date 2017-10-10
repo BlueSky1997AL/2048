@@ -17,7 +17,7 @@ header > div {
     margin-top: 5px;
 }
 
-#newGame {
+.btn {
     font-size: 1rem;
     padding: 10px;
     text-decoration: none;
@@ -28,8 +28,12 @@ header > div {
     cursor: pointer;
 }
 
-#newGame:hover {
+.btn:hover {
     background-color: #9f8b77;
+}
+
+#container {
+    position: relative;
 }
 
 #grid-container {
@@ -40,6 +44,39 @@ header > div {
     margin: 0 auto;
     border-radius: 10px;
     position: relative;
+}
+
+.message-box {
+    display: none;
+    width: 460px;
+    height: 460px;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.75);
+    border-radius: 10px;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-container {
+    margin-top: 20px;
+    width: 300px;
+    display: flex;
+    justify-content: space-around;
+}
+
+#success-msg-box {
+    display: none;
+}
+
+#failure-msg-box {
+    display: none;
 }
 
 .grid-cell {

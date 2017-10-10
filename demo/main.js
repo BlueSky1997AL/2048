@@ -296,10 +296,9 @@ function isGameOver (board) {
             })
         })
     ) {
-        // Need to be improved
-        renderScore(success);
+        renderSuccessBox();
     } else if (isNoSpace(board) && !canMove(board)) {
-        renderScore(failure);
+        renderFailureBox();
     }
 }
 
@@ -365,3 +364,24 @@ document.addEventListener('touchend', function (event) {
         }
     }
 })
+
+function renderSuccessBox () {
+    if ($('#success-msg-box').css('display') == 'none') {
+        $('#success-msg-box').fadeIn(700);
+    }
+}
+
+function continueGame () {
+    if ($('#success-msg-box').css('display') == 'block') {
+        $('#success-msg-box').fadeOut(700);
+    }
+    if ($('#failure-msg-box').css('display') == 'block') {
+        $('#failure-msg-box').fadeOut(700);
+    }
+}
+
+function renderFailureBox () {
+    if ($('#failure-msg-box').css('display') == 'none') {
+        $('#failure-msg-box').fadeIn(700);
+    }
+}
