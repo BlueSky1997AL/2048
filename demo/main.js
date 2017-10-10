@@ -255,7 +255,7 @@ function moveUp () {
 }
 
 function moveDown () {
-    if (!canMoveDown) {
+    if (!canMoveDown(board)) {
         return false;
     }
     for (let col = 0; col < 4; col++) {
@@ -336,7 +336,7 @@ document.addEventListener('touchend', function (event) {
     endY = event.changedTouches[0].pageY;
     let triangleX = endX - startX;
     let triangleY = endY - startY;
-    if (Math.abs(triangleX) < 0.3 * deviceWidth && Math.abs(triangleY) < 0.3 * deviceWidth) {
+    if (Math.abs(triangleX) < 0.1 * deviceWidth && Math.abs(triangleY) < 0.1 * deviceWidth) {
         return;
     }
     if ($('#score').text() == success) {
