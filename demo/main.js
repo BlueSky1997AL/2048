@@ -21,12 +21,8 @@ $(function () {
 })
 
 function newGame () {
-    if ($('#success-msg-box').css('display') == 'block') {
-        $('#success-msg-box').fadeOut(fadeDuration);
-    }
-    if ($('#failure-msg-box').css('display') == 'block') {
-        $('#failure-msg-box').fadeOut(fadeDuration);
-    }
+    removeSuccessBox();
+    removeFailureBox();
     init();
     generateANum();
     generateANum();
@@ -46,7 +42,7 @@ function init () {
         }
     }
 
-    //#region Test Array
+    //#region Test Board Array
     // board = [
     //     [0, 2, 4, 8],
     //     [16, 32, 64, 128],
@@ -134,6 +130,7 @@ $(document).keydown(function (event) {
         //left
         case 37: case 65:
             event.preventDefault();
+            removeSuccessBox();
             if (moveLeft()) {
                 setTimer();
             }
@@ -141,6 +138,7 @@ $(document).keydown(function (event) {
         // up
         case 38: case 87:
             event.preventDefault();
+            removeSuccessBox();
             if (moveUp()) {
                 setTimer();
             }
@@ -148,6 +146,7 @@ $(document).keydown(function (event) {
         // right
         case 39: case 68:
             event.preventDefault();
+            removeSuccessBox();
             if (moveRight()) {
                 setTimer();
             }
@@ -155,6 +154,7 @@ $(document).keydown(function (event) {
         // down
         case 40: case 83:
             event.preventDefault();
+            removeSuccessBox();
             if (moveDown()) {
                 setTimer();
             }
@@ -324,7 +324,16 @@ function mobileCompatible () {
         width: cellSideLength,
         height: cellSideLength,
         borderRadius: 0.02 * gridContainerWidth
-    })
+    });
+    $('.message-box').css({
+        width: gridContainerWidth - 2 * cellSpace,
+        height: gridContainerWidth - 2 * cellSpace,
+        padding: cellSpace,
+        borderRadius: 0.02 * gridContainerWidth
+    });
+    $('.message-box > p').css({
+        margin: `${cellSpace * 0.25}px 0`
+    });
 }
 
 document.addEventListener('touchstart', function (event) {
@@ -372,26 +381,40 @@ document.addEventListener('touchend', function (event) {
 })
 
 function renderSuccessBox () {
-    if ($('#success-msg-box').css('display') == 'none') {
+    const successMsgBox = $('#success-msg-box');
+    if (successMsgBox.css('display') == 'none') {
         $('#success-msg-box #score').text(score);
         $('#success-msg-box #highest-score').text(score);
-        $('#success-msg-box').fadeIn(fadeDuration);
+        successMsgBox.fadeIn(fadeDuration);
     }
 }
 
 function continueGame () {
-    if ($('#success-msg-box').css('display') == 'block') {
-        $('#success-msg-box').fadeOut(fadeDuration);
-    }
-    if ($('#failure-msg-box').css('display') == 'block') {
-        $('#failure-msg-box').fadeOut(fadeDuration);
+    const successMsgBox = $('#success-msg-box');
+    if (successMsgBox.css('display') == 'block') {
+        successMsgBox.fadeOut(fadeDuration);
     }
 }
 
 function renderFailureBox () {
-    if ($('#failure-msg-box').css('display') == 'none') {
+    const failureMsgBox = $('#failure-msg-box');
+    if (failureMsgBox.css('display') == 'none') {
         $('#failure-msg-box #score').text(score);
         $('#failure-msg-box #highest-score').text(score);
-        $('#failure-msg-box').fadeIn(fadeDuration);
+        failureMsgBox.fadeIn(fadeDuration);
+    }
+}
+
+function removeSuccessBox () {
+    const successMsgBox = $('#success-msg-box');
+    if (successMsgBox.css('display') == 'block') {
+        successMsgBox.fadeOut(fadeDuration);
+    }
+}
+
+function removeFailureBox () {
+    const failureMsgBox = $('#failure-msg-box');
+    if (failureMsgBox.css('display') == 'block') {
+        failureMsgBox.fadeOut(fadeDuration);
     }
 }
