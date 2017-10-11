@@ -4,6 +4,7 @@ const fadeDuration = 700;
 
 function renderScore (score) {
     // Need to be improved by using animation
+    updateHighestScore(score);
     $('#score').text(score);
 }
 

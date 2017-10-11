@@ -110,3 +110,24 @@ function canMove (board) {
     }
     return false;
 }
+
+// unstable
+function updateHighestScore (score) {
+    const highestScore = $.cookie('highestScore');
+    if (highestScore && highestScore < score) {
+        // console.log(highestScore);
+        // console.log(score);
+        // console.log(highestScore && highestScore < score);
+        $.cookie('highestScore', `${score}`, { expires: 7, path: '/' });
+        return;
+    }
+    $.cookie('highestScore', `${score}`, { expires: 7, path: '/' });
+}
+
+function getHighestScore () {
+    const highestScore = $.cookie('highestScore');
+    if (highestScore) {
+        return highestScore;
+    }
+    return null;
+}

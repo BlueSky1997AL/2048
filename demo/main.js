@@ -110,7 +110,7 @@ function generateANum () {
             })
         })
     }
-    const randNum = Math.random() < 0.5 ? 2 : 4;
+    const randNum = Math.random() < 0.8 ? 2 : 4;
     board[row][col] = randNum;
     showNum(row, col, randNum);
     return true;
@@ -384,7 +384,7 @@ function renderSuccessBox () {
     const successMsgBox = $('#success-msg-box');
     if (successMsgBox.css('display') == 'none') {
         $('#success-msg-box #score').text(score);
-        $('#success-msg-box #highest-score').text(score);
+        $('#success-msg-box #highest-score').text(getHighestScore());
         successMsgBox.fadeIn(fadeDuration);
     }
 }
@@ -400,7 +400,7 @@ function renderFailureBox () {
     const failureMsgBox = $('#failure-msg-box');
     if (failureMsgBox.css('display') == 'none') {
         $('#failure-msg-box #score').text(score);
-        $('#failure-msg-box #highest-score').text(score);
+        $('#failure-msg-box #highest-score').text(getHighestScore());
         failureMsgBox.fadeIn(fadeDuration);
     }
 }
