@@ -134,10 +134,11 @@ function getHighestScore () {
 
 function previousStep () {
     if (stepCount > 0) {
-        stepCount--;
-        board = cloneBoard(steps[--stepCount]);
+        board = cloneBoard(steps[--stepCount].board);
+        score = steps[stepCount].score;
         steps.pop();
         renderBoardView();
+        renderScore(score);
     }
 }
 

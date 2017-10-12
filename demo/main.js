@@ -7,7 +7,7 @@ let board = [];
 let conflict = [];
 let score = 0;
 let steps = [];
-let stepCount = 0;
+let stepCount = -1;
 let successFlag = false;
 let initflag = 1;
 
@@ -57,7 +57,8 @@ function init () {
     renderScore(score);
     successFlag = false;
     steps = [];
-    stepCount = 0;
+    stepCount = -1;
+    initflag = 1;
 }
 
 function renderBoardView () {
@@ -117,7 +118,7 @@ function generateANum () {
     const randNum = Math.random() < 0.8 ? 2 : 4;
     board[row][col] = randNum;
     if (!initflag) {
-        steps[stepCount++] = cloneBoard(board);
+        steps[++stepCount] = { board: cloneBoard(board), score};
     }
     if (initflag) {
         initflag--;
