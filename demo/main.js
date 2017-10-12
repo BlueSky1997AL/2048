@@ -93,6 +93,44 @@ function renderBoardView () {
     })
 }
 
+function renderPreviousStepView () {
+    $('.num-cell').fadeOut(showUpDuration, function () {
+        $(this).remove();
+    });
+    setTimeout(function() {
+        board.forEach((rows, row) => {
+            rows.forEach((num, col) => {
+                $('#grid-container').append(`<div class="num-cell" id="num-cell-${row}-${col}"></div>`);
+                const numCell = $(`#num-cell-${row}-${col}`);
+                if (num == 0) {
+                    numCell.css({
+                        height: '0px',
+                        width: '0px',
+                        top: getPos(row) + cellSideLength / 2,
+                        left: getPos(col) + cellSideLength / 2
+                    })
+                } else {
+                    numCell
+                        .css({
+                            display: 'none',
+                            height: cellSideLength,
+                            width: cellSideLength,
+                            top: getPos(row),
+                            left: getPos(col),
+                            backgroundColor: getBackgroundColor(num),
+                            color: getFontColor(num),
+                            fontSize: getFontSize(num),
+                            lineHeight: `${cellSideLength}px`
+                        })
+                        .text(num)
+                        .fadeIn(showUpDuration);
+                }
+                conflict[row][col] = false;
+            })
+        })
+    }, showUpDuration + 100);
+}
+
 function generateANum () {
     if (isNoSpace(board)) {
         return false;
@@ -394,7 +432,11 @@ function renderSuccessBox () {
     const successMsgBox = $('#success-msg-box');
     if (successMsgBox.css('display') == 'none') {
         $('#success-msg-box #score').text(score);
-        $('#success-msg-box #highest-score').text(getHighestScore());
+        if (getHighestScore()) {
+            $('#success-msg-box #highest-score').text(getHighestScore());
+        } else {
+            $('#success-msg-box #highest-score').text(score);
+        }
         successMsgBox.fadeIn(fadeDuration);
     }
 }
@@ -410,7 +452,11 @@ function renderFailureBox () {
     const failureMsgBox = $('#failure-msg-box');
     if (failureMsgBox.css('display') == 'none') {
         $('#failure-msg-box #score').text(score);
-        $('#failure-msg-box #highest-score').text(getHighestScore());
+        if (getHighestScore()) {
+            $('#failure-msg-box #highest-score').text(getHighestScore());
+        } else {
+            $('#failure-msg-box #highest-score').text(score);
+        }
         failureMsgBox.fadeIn(fadeDuration);
     }
 }

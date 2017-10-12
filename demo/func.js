@@ -114,14 +114,17 @@ function canMove (board) {
 // unstable
 function updateHighestScore (score) {
     const highestScore = $.cookie('highestScore');
+    console.log(`Boolean Value: ${highestScore && highestScore < score}`);
     if (highestScore && highestScore < score) {
-        // console.log(highestScore);
-        // console.log(score);
-        // console.log(highestScore && highestScore < score);
+        console.log(`Highest Score: ${highestScore}`);
+        console.log(`Current Score: ${score}`);
+        console.log(`Boolean Value: ${highestScore && highestScore < score}`);
         $.cookie('highestScore', `${score}`, { expires: 7, path: '/' });
-        return;
+        console.log(`Updated Highest Score: ${$.cookie('highestScore')}`);
     }
-    $.cookie('highestScore', `${score}`, { expires: 7, path: '/' });
+    if (!highestScore) {
+        $.cookie('highestScore', `${score}`, { expires: 7, path: '/' });
+    }
 }
 
 function getHighestScore () {
@@ -137,7 +140,7 @@ function previousStep () {
         board = cloneBoard(steps[--stepCount].board);
         score = steps[stepCount].score;
         steps.pop();
-        renderBoardView();
+        renderPreviousStepView();
         renderScore(score);
     }
 }
