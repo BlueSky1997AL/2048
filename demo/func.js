@@ -131,3 +131,23 @@ function getHighestScore () {
     }
     return null;
 }
+
+function previousStep () {
+    if (stepCount > 0) {
+        stepCount--;
+        board = cloneBoard(steps[--stepCount]);
+        steps.pop();
+        renderBoardView();
+    }
+}
+
+function cloneBoard (board) {
+    let target = [];
+    board.forEach((rows, row) => {
+        target[row] = [];
+        rows.forEach((num, col) => {
+            target[row][col] = num;
+        })
+    })
+    return target;
+}

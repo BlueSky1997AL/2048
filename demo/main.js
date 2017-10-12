@@ -3,12 +3,13 @@ let gridContainerWidth = 0.92 * deviceWidth;
 let cellSideLength = 0.18 * deviceWidth;
 let cellSpace = 0.04 * deviceWidth;
 
-const success = 'You Win!';
-const failure = 'Game Over!'
-
 let board = [];
 let conflict = [];
 let score = 0;
+let steps = [];
+let stepCount = 0;
+let successFlag = false;
+let initflag = 1;
 
 $(function () {
     for (let i = 0; i < 4; i++) {
@@ -54,6 +55,9 @@ function init () {
     renderBoardView();
     score = 0;
     renderScore(score);
+    successFlag = false;
+    steps = [];
+    stepCount = 0;
 }
 
 function renderBoardView () {
@@ -112,6 +116,12 @@ function generateANum () {
     }
     const randNum = Math.random() < 0.8 ? 2 : 4;
     board[row][col] = randNum;
+    if (!initflag) {
+        steps[stepCount++] = cloneBoard(board);
+    }
+    if (initflag) {
+        initflag--;
+    }
     showNum(row, col, randNum);
     return true;
 }
@@ -302,7 +312,10 @@ function isGameOver (board) {
             })
         })
     ) {
-        renderSuccessBox();
+        if (!successFlag) {
+            renderSuccessBox();
+            successFlag = true;
+        }
     } else if (isNoSpace(board) && !canMove(board)) {
         renderFailureBox();
     }
@@ -351,10 +364,6 @@ document.addEventListener('touchend', function (event) {
     let triangleX = endX - startX;
     let triangleY = endY - startY;
     if (Math.abs(triangleX) < 0.1 * deviceWidth && Math.abs(triangleY) < 0.1 * deviceWidth) {
-        return;
-    }
-    if ($('#score').text() == success) {
-        newGame();
         return;
     }
     if (Math.abs(triangleX) >= Math.abs(triangleY)) {
