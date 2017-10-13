@@ -114,16 +114,11 @@ function canMove (board) {
 // unstable
 function updateHighestScore (score) {
     const highestScore = $.cookie('highestScore');
-    console.log(`Boolean Value: ${highestScore && highestScore < score}`);
     if (highestScore && highestScore < score) {
-        console.log(`Highest Score: ${highestScore}`);
-        console.log(`Current Score: ${score}`);
-        console.log(`Boolean Value: ${highestScore && highestScore < score}`);
-        $.cookie('highestScore', `${score}`, { expires: 7, path: '/' });
-        console.log(`Updated Highest Score: ${$.cookie('highestScore')}`);
+        $.cookie('highestScore', `${score}`, { expires: 30, path: '/' });
     }
     if (!highestScore) {
-        $.cookie('highestScore', `${score}`, { expires: 7, path: '/' });
+        $.cookie('highestScore', `${score}`, { expires: 30, path: '/' });
     }
 }
 
