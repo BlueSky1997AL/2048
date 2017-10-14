@@ -111,15 +111,19 @@ function canMove (board) {
     return false;
 }
 
-// unstable
 function updateHighestScore (score) {
-    const highestScore = $.cookie('highestScore');
+    const highestScore = localStorage.highestScore;
     if (highestScore && highestScore < score) {
-        $.cookie('highestScore', `${score}`, { expires: 30, path: '/' });
+        localStorage.highestScore = score;
     }
     if (!highestScore) {
-        $.cookie('highestScore', `${score}`, { expires: 30, path: '/' });
+        localStorage.highestScore = score;
     }
+}
+
+function updateGameDate (steps, stepCount, successFlag) {
+    localStorage.steps = JSON.stringify(steps);
+    localStorage.successFlag = successFlag;
 }
 
 function getHighestScore () {
@@ -137,6 +141,7 @@ function previousStep () {
         steps.pop();
         renderPreviousStepView();
         renderScore(score);
+        updateGameDate(steps, stepCount, successFlag);
     }
 }
 

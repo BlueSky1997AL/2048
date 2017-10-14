@@ -18,7 +18,22 @@ $(function () {
         }
     }
     mobileCompatible();
-    newGame();
+    if (localStorage.steps && localStorage.highestScore && localStorage.successFlag) {
+        init();
+        steps = JSON.parse(localStorage.steps);
+        stepCount = steps.length - 1;
+        switch (localStorage.successFlag) {
+            case 'true': successFlag = true; break;
+            case 'false': successFlag = false; break;
+            default: successFlag = false; break;
+        }
+        board = cloneBoard(steps[stepCount].board);
+        score = steps[stepCount].score;
+        renderBoardView();
+        renderScore(score);
+    } else {
+        newGame();
+    }
 })
 
 function newGame () {
@@ -157,6 +172,7 @@ function generateANum () {
     board[row][col] = randNum;
     if (!initflag) {
         steps[++stepCount] = { board: cloneBoard(board), score};
+        updateGameDate(steps, stepCount, successFlag);
     }
     if (initflag) {
         initflag--;
