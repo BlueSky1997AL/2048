@@ -127,7 +127,7 @@ function updateGameDate (steps, stepCount, successFlag) {
 }
 
 function getHighestScore () {
-    const highestScore = $.cookie('highestScore');
+    const highestScore = localStorage.highestScore;
     if (highestScore) {
         return highestScore;
     }
