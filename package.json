@@ -1,0 +1,27 @@
+{
+  "name": "2048",
+  "version": "1.0.0",
+  "description": "H5 Game Demo -2048",
+  "main": "./server/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BlueSky1997AL/2048.git"
+  },
+  "keywords": [
+    "2048",
+    "H5",
+    "game"
+  ],
+  "author": "Allen Lawrence",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BlueSky1997AL/2048/issues"
+  },
+  "homepage": "https://github.com/BlueSky1997AL/2048#readme",
+  "devDependencies": {
+    "express": "^4.16.2"
+  }
+}
