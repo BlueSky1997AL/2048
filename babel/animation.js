@@ -1,5 +1,5 @@
 var showUpDuration = 100;
-var motionDuration = 300;
+var motionDuration = 120;
 var fadeDuration = 700;
 
 function renderScore(score) {
