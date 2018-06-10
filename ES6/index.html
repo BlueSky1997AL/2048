@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>2048</title>
+    <link rel="stylesheet" href="./style.css">
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="./main.js"></script>
+    <script type="text/javascript" src="./func.js"></script>
+    <script type="text/javascript" src="./animation.js"></script>
+</head>
+
+<body>
+    <header>
+        <h1>2048</h1>
+        <a href="javascript:newGame()" id="newGame" class="btn">New Game</a>
+        <a href="javascript:previousStep()" id="previousStep" class="btn">Back</a>
+        <div>SCORE:
+            <span id="score">0</span>
+        </div>
+    </header>
+    <section id="container">
+        <div id="grid-container"></div>
+        <div id="success-msg-box">
+            <div class="message-box">
+                <h1>You Win!</h1>
+                <p>You've achieved the number of 2048! Your score is <span id="score">N/A</span> ,</p>
+                <p>and the highest score is <span id="highest-score">N/A</span> .</p>
+                <p>Do you want to continue, or start a new game?</p>
+                <div class="btn-container">
+                    <a href="javascript:continueGame()" class="btn">Continue</a>
+                    <a href="javascript:newGame()" class="btn">New Game</a>
+                </div>
+            </div>
+        </div>
+        <div id="failure-msg-box">
+            <div class="message-box">
+                <h1>Oops, Game Over</h1>
+                <p>We are sorry to announce that game is over.</p>
+                <p>Your score is <span id="score">N/A</span> , and the highest score is <span id="highest-score">N/A</span> .</p>
+                <p>Do you want to start a new game?</p>
+                <div class="btn-container">
+                    <a href="javascript:newGame()" class="btn">New Game</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer></footer>
+</body>
+
+</html>
