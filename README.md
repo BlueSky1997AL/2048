@@ -1,6 +1,8 @@
 # 2048 - jQuery小游戏
 
-> **预览地址：&#x1F449;**[点击开玩](https://bluesky1997al.github.io/2048/)
+> **预览地址：&#x1F449;** [点击开玩](https://bluesky1997al.github.io/2048/)  
+&#x1F447; **或扫描二维码**  
+![二维码](asset/qr_code.png)
 
 利用课余时间，基于 jQuery 制作的 HTML 小游戏 &#x1F3AE;
 
@@ -37,15 +39,15 @@
 ## 目录结构
 
 ```bash
-. 2048
-├── asset               # README.md 中用到的图像资源
-├── es5                 # 使用 JavaScript ES5 版本制作的小游戏
-├── es6                 # 使用 JavaScript ES6 版本制作的小游戏
-├── server              # Express 静态资源服务器
-├── .gitignore          # git 忽略文件列表
-├── package-lock.json   # 包依赖锁文件
-├── package.json        # 包描述文件
-└── README.md           # 本说明文件
+  . 2048
+  ├── asset               # README.md 中用到的图像资源
+  ├── es5                 # 使用 JavaScript ES5 版本制作的小游戏
+  ├── es6                 # 使用 JavaScript ES6 版本制作的小游戏
+  ├── server              # Express 静态资源服务器
+  ├── .gitignore          # git 忽略文件列表
+  ├── package-lock.json   # 包依赖锁文件
+  ├── package.json        # 包描述文件
+  └── README.md           # 本说明文件
 ```
 
 ## 技术细节
@@ -73,15 +75,15 @@
 ## 本地运行及开发
 
 ```bash
-# 克隆项目
-git clone https://github.com/BlueSky1997AL/2048.git
+  # 克隆项目
+  git clone https://github.com/BlueSky1997AL/2048.git
 
-# 安装依赖
-cd 2048
-npm install
+  # 安装依赖
+  cd 2048
+  npm install
 
-# 启动静态资源服务器
-npm start
+  # 启动静态资源服务器
+  npm start
 ```
 服务将会运行在 [http://localhost:3000/](http://localhost:3000/)
 
