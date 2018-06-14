@@ -1,7 +1,6 @@
 # 2048 - jQuery小游戏
 
-> **预览地址：&#x1F449;** [点击开玩](https://bluesky1997al.github.io/2048/)  
-&#x1F447; **或扫描二维码**  
+> **预览地址：&#x1F449;** [点击开玩](https://bluesky1997al.github.io/2048/) 或扫描二维码  
 ![二维码](asset/qr_code.png)
 
 利用课余时间，基于 jQuery 制作的 HTML 小游戏 &#x1F3AE;
