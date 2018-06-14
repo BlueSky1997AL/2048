@@ -1,6 +1,6 @@
 # 2048 - jQuery小游戏
 
-> **预览地址：&#x1F449;** [点击开玩](https://bluesky1997al.github.io/2048/) 或扫描二维码  
+> **预览地址：&#x1F449;** [点击开玩](https://bluesky1997al.github.io/2048/) 或 扫描二维码  
 ![二维码](asset/qr_code.png)
 
 利用课余时间，基于 jQuery 制作的 HTML 小游戏 &#x1F3AE;
@@ -75,14 +75,14 @@
 
 ```bash
   # 克隆项目
-  git clone https://github.com/BlueSky1997AL/2048.git
+  $ git clone https://github.com/BlueSky1997AL/2048.git
 
   # 安装依赖
-  cd 2048
-  npm install
+  $ cd 2048
+  $ npm install
 
   # 启动静态资源服务器
-  npm start
+  $ npm start
 ```
 服务将会运行在 [http://localhost:3000/](http://localhost:3000/)
 
